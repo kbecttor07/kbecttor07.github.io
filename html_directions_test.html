@@ -160,10 +160,12 @@ and also then use that to (A) center the map (B) mark that as origin and start m
             console.log("success")
             console.log(data)
         },
-        error: function (err) {
+        error: function (jqXHR, status, err) {
             // handle your error logic here
-            console.log('Error:', data)
-            console.log(data)
+          console.log("ajax error occured")
+          console.log(jqXHR)
+          console.log(status)
+          console.log(err)
         }
     });
     }
