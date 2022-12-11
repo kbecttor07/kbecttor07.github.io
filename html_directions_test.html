@@ -120,7 +120,7 @@ and also then use that to (A) center the map (B) mark that as origin and start m
   function calculateAndDisplayRoute() {
     // Get the start and end locations from the form
     // var start = document.getElementById('start').value;
-    var start = userMarker.position
+    var start = userMarker.position;
     var end = document.getElementById('end').value;
 
     // Use the DirectionsService to calculate the route
@@ -142,18 +142,26 @@ and also then use that to (A) center the map (B) mark that as origin and start m
         window.alert('Directions request failed due to ' + status);
       }
     });
+    var rpi = document.getElementById('rpi_IP').value;
+    data = {
+      start
+    }
     $.ajax({
         type: "POST",
-        url: "http://www.yoururl.com/",
+        url: "http://" + rpi + "/location",
         crossDomain: true,
-        data: 'param1=value1&param2=value2',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
         success: function (data) {
             // do something with server response data
             console.log("success")
+            console.log(data)
         },
         error: function (err) {
             // handle your error logic here
             console.log("failed")
+            console.log(data)
         }
     });
   }
