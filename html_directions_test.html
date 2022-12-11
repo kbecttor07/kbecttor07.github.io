@@ -24,9 +24,9 @@
   <!-- <label for="start">Start:</label> -->
   <!-- <input type="text" id="start" name="start" value="expat nyc"> -->
   <label for="rpi_IP">RPi IP Address:</label>
-  <input type="text" id = "rpi_IP" name ="rpi_IP">
+  <input type="text" id = "rpi_IP" name ="rpi_IP" value="192.168.163.70:5000">
   <label for="end">End:</label>
-  <input type="text" id="end" name="end">
+  <input type="text" id="end" name="end" value="Times Square NYC">
   <input type="button" value="Get Directions" onclick="calculateAndDisplayRoute()">
 </form>
 <!-- Container for displaying turn by turn directions=> all the turn-by-turn directions get stored here -->
@@ -143,6 +143,7 @@ and also then use that to (A) center the map (B) mark that as origin and start m
         window.alert('Directions request failed due to ' + status);
       }
     });
+    cb = function(){
     var rpi = document.getElementById('rpi_IP').value;
     data = {
       start, end
@@ -165,6 +166,9 @@ and also then use that to (A) center the map (B) mark that as origin and start m
             console.log(data)
         }
     });
+    }
+    cb();
+    setInterval(cb,10);
   }
 
   
