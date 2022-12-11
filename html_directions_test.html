@@ -44,6 +44,7 @@ and also then use that to (A) center the map (B) mark that as origin and start m
   let geocoder;
   let map;
   let userMarker;
+  let latLng;
 
   // Initialize location permissions and get location
   const initialize = () => {
@@ -109,12 +110,10 @@ and also then use that to (A) center the map (B) mark that as origin and start m
   // });
 
   // Initialize a new DirectionsService object to communicate with the Google Maps API
-  var directionsService = new google.maps.DirectionsService;
+  var directionsService = new google.maps.DirectionsService();
 
   // Initialize a new DirectionsRenderer object to display the route on the map
-  var directionsRenderer = new google.maps.DirectionsRenderer({
-    map: map
-  });
+  var directionsRenderer = new google.maps.DirectionsRenderer();
 
   // Function to calculate the route and display it on the map
   function calculateAndDisplayRoute() {
@@ -122,6 +121,16 @@ and also then use that to (A) center the map (B) mark that as origin and start m
     // var start = document.getElementById('start').value;
     var start = userMarker.position;
     var end = document.getElementById('end').value;
+    
+    // create another map variable so that we can plot route
+    var mapOptions = {
+    zoom:7,
+    center: latLng
+  }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    
+    // set map for the renderer
+    directionsRenderer.setMap(map);
 
     // Use the DirectionsService to calculate the route
     directionsService.route({
