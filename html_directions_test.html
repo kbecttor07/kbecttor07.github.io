@@ -135,6 +135,7 @@ and also then use that to (A) center the map (B) mark that as origin and start m
         directionsRenderer.setDirections(response);
         // Display the turn by turn directions in the specified container
         document.getElementById('directions').innerHTML = response.routes[0].legs[0].steps.map(function(step) {
+          console.log(response.routes[0].legs[0].steps[2].distance['text'])
           return step.instructions;
         }).join('<br>');
       } else {
@@ -144,7 +145,7 @@ and also then use that to (A) center the map (B) mark that as origin and start m
     });
     var rpi = document.getElementById('rpi_IP').value;
     data = {
-      start
+      start, end
     }
     $.ajax({
         type: "POST",
